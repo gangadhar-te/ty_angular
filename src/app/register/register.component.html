@@ -1,0 +1,42 @@
+<div class="alert alert-danger" *ngIf="error">
+    {{error}}
+</div>
+<div class="alert alert-success" *ngIf="message">
+    {{message}}
+</div>
+<div class="text-center mt-5" *ngIf="isLoading">
+    <app-spinner></app-spinner>
+</div>
+<div class="col-md-4 offset-md-4 mt-3">
+    <form action="" #registrationForm="ngForm" (ngSubmit)="onRegister(registrationForm)">
+        <div class="card">
+            <h3 class="card-header text-center">Please Register!!!</h3>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="fullName">FullName</label>
+                        <input type="text" name='fullName' class="form-control" ngModel #fullName="ngModel">
+                     </div>
+                    <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" name="email" ngModel #email="ngModel">
+                     </div>
+                     <div class="form-group">
+                      <label for="password">Password</label>
+                      <input type="password" class="form-control" name="password" ngModel #password="ngModel">
+                      </div>
+                      <div class="form-group">
+                      <label for="role">Role</label>
+                     <select name="role" id="role" class="form-control" ngModel #role="ngModel">
+                      <option value="admin">Admin</option>
+                     <option value="user">User</option>
+                     </select>
+                  </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <button class="btn btn-secondary" type="reset">Reset</button>
+                </div>
+
+        </div>
+    </form>
+</div>

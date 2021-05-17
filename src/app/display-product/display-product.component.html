@@ -1,0 +1,106 @@
+<div class="alert alert-danger" *ngIf="error">
+  {{ error }}
+</div>
+<div class="text-center mt-5" *ngIf="isLoading">
+  <app-spinner></app-spinner>
+</div>
+<div class="alert alert-warning" *ngIf="message">
+  {{ message }}
+</div>
+<div class="wrapper">
+  <div class="row">
+    <div class="col-md-3" *ngFor="let product of products">
+      <div class="card">
+        <img
+          [src]="product.productImageURL"
+          [alt]="product.productName"
+          height="150px"
+          width="100%"
+        />
+        <div class="card-body">
+          <div>
+            {{ product.productName }}
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-warning" (click)="deleteProduct(product)">
+            Delete
+          </button>
+        <button class="btn btn-primary" data-bs-toggle="modal"
+        data-bs-target="#updateProductModal" (click)="onEditProduct(product)" >Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+
+<div
+  class="modal fade"
+  id="updateProductModal"
+  tabindex="-1"
+  aria-labelledby="updateProductModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          #modalCloseButton
+        >
+    <span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <form action="" #editProductForm="ngForm" 
+        *ngIf= "selectedProductToEdit && !productUpdating" (ngSubmit)="onFormSubmit()">
+            <div class="card bord">
+                <div class="card-header text-success text-center fw-bolder">Update Product</div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="productName">Product Name</label>
+                        <input type="text" class="form-control mb-4" id="productName"
+                         [(ngModel)]="selectedProductToEdit.productName"
+                        name="productName" ngModel #productName>
+                    </div>
+                    <div class="form-group">
+                        <label for="productPrice">Product Price</label>
+                        <input type="text" class="form-control mb-4" id="productPrice"
+                        [(ngModel)]="selectedProductToEdit.productPrice"
+                        name="productPrice" ngModel #productPrice>
+                    </div>
+                    <div class="form-group">
+                        <label for="productImageURL">Product Image Url</label>
+                        <input type="text" class="form-control mb-4" id="productImageURL"
+                        [(ngModel)]="selectedProductToEdit.productImageURL"
+                        name="productImageURL" ngModel #productImageURL>
+                    </div>
+                    <div class="form-group">
+                        <label for="productDescription">Description</label>
+                        <input type="text" class="form-control mb-4" id="productDescription"
+                        [(ngModel)]="selectedProductToEdit.productDescription"
+                        name="productDescription" ngModel #productDescription>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="button-group float-right">
+                        <button type="submit" class="btn btn-secondary mx-2">Submit</button>
+                        <button type="reset" class="btn btn-primary">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+    </div>
+  </div>
+</div>
